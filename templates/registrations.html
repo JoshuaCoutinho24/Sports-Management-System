@@ -4,63 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title> 
-
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="/static/registrations.css">
 </head>
-<body>
+    <body>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">SMS</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><a href="./Home.html">Home</a></li>
+                    <li class="active"><a href="./registrations.html">Register</a></li>
+                    <li><a href="./admin">Admin</a></li>
+                </ul>
+            </div>
+        </nav>
+        <form action="" method="POST" name="myform" class="form">
+            <div class="head">
+                <h1 class="title">Registration Form</h1><br>
+            </div>
+            <div class="name">
+                Name:<input type="text" placeholder=" Name*" name="name1" required>
+            </div>
+            <br>
+            <div class="rollno">
+                Roll No.:<input type="Number" placeholder=" College Roll No.*" name="number1" required>
+            </div>
+            <br>
+            <div class="class">
+                Class: 
+                <select name="classes" required>
+                    <option> --</option> 
+                    <option>FE</option>
+                    <option>SE</option>
+                    <option>TE</option>
+                    <option>BE</option>
+                </select>
+                <select name="department" required>
+                    <option> --</option>
+                    <option>Computer</option>
+                    <option>Civil</option>
+                    <option>Mechical</option>
+                    <option>ETC</option>
+                </select>
+            </div>
+            <br>
+            <div class="sports">
+                Interested Sport:<br>
 
-    
-    <form action="" method="POST" name="myform" >
-        <div class="form-row">
-            <div class="form-group col-md-6">   
-         Name:<input type="text"  class="form-control" placeholder="Name" name="name1" > <br><br>
 
-         
-         
-
-        </div>
-         Roll No:<input type="Number"  placeholder=" College RollNo" name="number1"> <br><br>
-         class:
-          <select name="class" >
-            <option>--</option> 
-            <option >FE</option>
-            <option >SE</option>
-            <option>TE</option>
-            <option >BE</option>
-         </select>
-
-         <select name="department" id="">
-            <option >--</option>
-            <option> Comp</option>
-            <option >Civil</option>
-            <option >Mech</option>
-            <option >ETC</option>
-         </select>
-         <br><br>
+                <section title=".squaredThree">
+                    <!-- .squaredThree -->
+                    <div class="squaredThree">
+                      <input type="checkbox" value="None" id="squaredThree" name="check">
+                      <label></label>
+                    </div>
+                    <!-- end .squaredThree -->
+                  </section>
 
 
-        Interested Sport:
-       <input type="checkbox" name="sport[]" value="Basketball">  Basketball
-        <input type="checkbox" name="sport[]" value="Football"> Football
-       <input type="checkbox" name="sport[]" value="Volleyball">  Volleyball  
-       <br><br>
-
-       Email:<input type="Email" placeholder="Email" name="email"><br><br>
-
-         
-
-        <input type="submit" >
-        </div>
-
-
-
-
-        
-	
-    </form>
-
-    
-    
-</body>
-</html> 
+                <p><input type="checkbox" name="sport[]" value="Basketball" class="sport"> Basketball</p>
+                <p><input type="checkbox" name="sport[]" value="Football" class="sport"> Football</p>
+                <p><input type="checkbox" name="sport[]" value="Volleyball" class="sport"> Volleyball</p>
+            </div>
+            <br>
+            <div class="email">
+                Email: <input type="email" placeholder=" Email*" name="email" required>
+            </div>
+            <br>
+            <div class="submit">
+                <input type="submit" class="button">        
+            </div>
+        </form>
+    </body>
+</html>
