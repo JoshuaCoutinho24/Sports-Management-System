@@ -109,7 +109,7 @@ def login():
     if request.method=="POST":
         if request.form.get("name")=="Root" and request.form.get("password")=="Admin":
             session["logged in"]=True
-            return redirect("/admin/events")    
+            return render_template("admin.html")    
     else:
         return render_template("login.html",failed=True)
     return render_template("login.html");
