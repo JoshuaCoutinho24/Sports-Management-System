@@ -63,30 +63,19 @@ def insert():
         number=request.form["number1"];
         class1=request.form["class"];
         dep=request.form["department"];
-        sport=request.form["sport[]"];
+        sport=request.form["sport"];
+        str1 = ','.join(sport);
         mail=request.form["email"];
         
 
 
 
-        stud=student_details(Name=name,Rollno=number,email=mail,Class=class1,Department=dep,Sport=sport);
+        stud=student_details(Name=name,Rollno=number,email=mail,Class=class1,Department=dep,Sport=str1);
         db.session.add(stud);
         db.session.commit();
 
         return "Success";
 
-
-
-
-
-
-        # con=mysql.connection.cursor();
-        # con.execute("INSERT INTO student_details (Name,Rollno,Email,Class ,Department,Sport) VALUES (%s,%s,%s,%s,%s,%s)",(name,number,mail,class1,dep,sport));
-
-        # mysql.connection.commit();
-
-        # con.close();
-        # return "DONE"
 
 
 app.run(debug=True)
