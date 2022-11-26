@@ -96,6 +96,14 @@ admin.add_view(e(events,db.session));
 def index():
     return render_template("Home.html");
 
+
+
+@app.route("/Home")
+def index1():
+    return render_template("Home.html");
+
+
+
 @app.route("/login",methods=["GET","POST"])
 def login():
     if request.method=="POST":
