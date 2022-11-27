@@ -109,7 +109,7 @@ def login():
     if request.method=="POST":
         if request.form.get("name")=="Root" and request.form.get("password")=="Admin":
             session["logged in"]=True
-            return render_template("admin.html")    
+            return redirect("/loggedin")   
     else:
         return render_template("login.html",failed=True)
     return render_template("login.html");
@@ -150,21 +150,51 @@ def insert():
         db.session.commit();
 
 
-        return redirect("/");
+        return "success"    
+
+
+@app.route("/loggedin")
+def log():
+    return render_template("admin.html");
 
 
 
 
+@app.route("/form2")
+def log2():
+    return render_template("form2.html");
 
 
-        # con=mysql.connection.cursor();
-        # con.execute("INSERT INTO student_details (Name,Rollno,Email,Class ,Department,Sport) VALUES (%s,%s,%s,%s,%s,%s)",(name,number,mail,class1,dep,sport));
 
-        # mysql.connection.commit();
 
-        # con.close();
-        # return "DONE"
+@app.route("/addmain")
+def addevent():
+    if request.method=="GET":
+        return render_template("form2.html")
 
+    if request.method=="POST":
+        name=request.form["name"];
+        id=request.form["id"];
+        sc=request.form["schedule"];
+        rules=request.form["Rules"];
+
+
+        event=student_details(Name=name,ID=id,Schedule=sc,Rules=rules);
+        db.session.add(event);
+        db.session.commit();
+
+
+        return "Success";
+        
+
+        
+
+
+    
+    
+
+
+       
 
 app.run(debug=True)
 
