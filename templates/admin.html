@@ -27,11 +27,17 @@
       </div>
   </nav>
 
-    <div class="">
-      <h1 class="ones">Sports Management System</h1>
-    </div>
-
+  <div class="done">
+    {% for x in data %}   
     <div class="center">
+      <b>{{x[0]}}</b><br>
+      {{x[1]}}<br>
+      {{x[2]}}<br>
+      {{x[3]}}
+    </div><br>
+    {% endfor %}
+  </div>   
+  
 
     </div>
     <h1>HEllo</h1>

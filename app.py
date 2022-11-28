@@ -6,9 +6,14 @@ from flask_mysqldb import MySQL
 from flask_login import UserMixin,LoginManager,current_user,login_user
 from flask import session
 import mysql.connector
+from flask_wtf import FlaskForm
+from wtforms import StringField,PasswordField,BooleanField
+from flask_bootstrap import Bootstrap
+
 
 app = Flask(__name__)
 admin=Admin(app)
+Bootstrap(app);
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/test"
@@ -37,11 +42,20 @@ login=LoginManager(app);
 
 @login.user_loader
 def userid(id):
-    return student_details.query.get(id)
+    return user.query.get(int(id))
     
 
 
 #Classes
+
+class user(FlaskForm):
+    
+    Username=db.Column(db.Text, unique=True)
+    Password=db.Column(db.Text)
+
+
+
+
 class student_details(db.Model,UserMixin):
     
     Name=db.Column(db.Text)
@@ -93,7 +107,7 @@ class e(ModelView):
 
 
 admin.add_view(details(student_details,db.session));
-admin.add_view(e(events,db.session));
+admin.add_view(ModelView(events,db.session));
 
 
 
@@ -117,29 +131,37 @@ def index():
 
 
 
-@app.route("/Home")
-def index1():
-    return render_template("Home.html");
 
-
-
-@app.route("/login",methods=["GET","POST"])
+@app.route('/login', methods =['GET', 'POST'])
 def login():
-    if request.method=="POST":
-        if request.form.get("name")=="Root" and request.form.get("password")=="Admin":
-            session["logged in"]=True
-            return redirect("/loggedin")   
-    else:
-        return render_template("login.html",failed=True)
-    return render_template("login.html");
+    msg = ''
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        cursor = mysql.connection.cursor()
+        cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
+        account = cursor.fetchone()
+        if account:
+            session['loggedin'] = True
+            msg = 'Logged in successfully !'
+            cursor=mydb.cursor();
+            cursor.execute("SELECT * FROM events")
+
+            myresult = cursor.fetchall()
     
+    
+
+            return render_template("admin.html",data=myresult);
+        else:
+            msg = 'Incorrect username / password !'
+    return render_template('login.html')
 
 
 
 @app.route("/logout")
 def  logout():
     session.clear()
-    return redirect("/");
+    return redirect("/ ");
     
     
 
@@ -172,13 +194,6 @@ def insert():
         return "success"    
 
 
-@app.route("/loggedin")
-def log():
-    return render_template("admin.html");
-
-
-
-
 @app.route("/form2")
 def log2():
     return render_template("form2.html");
@@ -186,7 +201,7 @@ def log2():
 
 
 
-@app.route("/addmain",methods=(["GET","POST"]))
+@app.route("/admin",methods=(["GET","POST"]))
 def addevent():
     if request.method=="GET":
         return render_template("form2.html")
@@ -199,10 +214,6 @@ def addevent():
 
 
     
-
-        
-
-
         event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
         db.session.add(event);
         db.session.commit();
@@ -210,7 +221,35 @@ def addevent():
 
 
 
-        return redirect(url_for("index"));
+        return redirect(url_for("index.html"));
+
+
+@app.route("/index",methods=(["GET","POST"]))
+def ind():
+    
+        if request.method=="GET":
+            return render_template("index.html")
+
+        if request.method=="POST":
+            name=request.form["name"];
+            id=request.form["id"];
+            sc=request.form["schedule"];
+            rules=request.form["rules"];
+            event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
+            db.session.add(event);
+            db.session.commit();
+        
+            cursor=mydb.cursor();
+            cursor.execute("SELECT * FROM events")
+
+            myresult = cursor.fetchall()
+    
+    
+
+            return render_template("index.html",data=myresult);
+
+    
+    
         
 
 @app.route("/addd")
