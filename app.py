@@ -273,9 +273,3 @@ def log21():
 
 app.run(debug=True)
 
-
-
-
-    
-
-   
