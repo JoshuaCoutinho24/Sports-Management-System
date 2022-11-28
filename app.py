@@ -129,7 +129,7 @@ def index():
     
     
 
-    return render_template("Home.html",data=myresult);
+    return render_template("/demo.html",data=myresult);
 
     
 
