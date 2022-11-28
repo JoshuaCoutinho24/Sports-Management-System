@@ -4,7 +4,10 @@ body{
     background-color: lightgreen;
     color: rgb(32, 141, 32);
     font-family: Assistant, sans-serif;
-    min-height: 90vh;
+    height: 100%;
+    width: 100%;
+   
+    
 }
 
 .x{
@@ -27,15 +30,16 @@ body{
 
 .done{
     display: flex;
+    flex-wrap:wrap ;
     width: 100%;
-    overflow-wrap: break-word;
+    
+    
 
     
 }
 
 .center{
-    flex-direction: row;
-    
+    flex-direction: row;    
     color: aliceblue;
     background-image: linear-gradient(90deg,rgb(32, 141, 32), #57d25b);
     border-radius: 10px;

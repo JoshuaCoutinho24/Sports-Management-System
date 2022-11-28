@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,abort,redirect,url_for
-from flask_admin import Admin
+from flask_admin import Admin,AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
@@ -52,6 +52,9 @@ class user(FlaskForm):
     
     Username=db.Column(db.Text, unique=True)
     Password=db.Column(db.Text)
+
+
+
 
 
 
@@ -116,6 +119,7 @@ admin.add_view(ModelView(events,db.session));
 
 
 
+
 @app.route("/",methods=["GET"])
 def index():
     cursor=mydb.cursor();
@@ -141,17 +145,17 @@ def login():
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
         account = cursor.fetchone()
-        if account:
+        if account :
             session['loggedin'] = True
             msg = 'Logged in successfully !'
             cursor=mydb.cursor();
-            cursor.execute("SELECT * FROM events")
+            cursor.execute("SELECT * FROM events")  
 
             myresult = cursor.fetchall()
     
     
 
-            return render_template("admin.html",data=myresult);
+            return render_template("/admin.html");
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html')
@@ -201,7 +205,7 @@ def log2():
 
 
 
-@app.route("/admin",methods=(["GET","POST"]))
+@app.route("/admin1",methods=(["GET","POST"]))
 def addevent():
     if request.method=="GET":
         return render_template("form2.html")
@@ -243,6 +247,7 @@ def ind():
             cursor.execute("SELECT * FROM events")
 
             myresult = cursor.fetchall()
+            
     
     
 
