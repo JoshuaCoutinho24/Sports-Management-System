@@ -17,11 +17,13 @@
                 <ul class="nav navbar-nav">
                     <li class="active two"><a href="./" class="one">Home</a></li>
                     <li class="two"><a href="./registrations" class="one">Register</a></li>
-                    <li class="two"><a href="./login" class="one">Login</a></li>
+                    <li class="two"><a href="./addmain" class="one">Addevent</a></li>
+                    <li class="two"><a href="./admin" class="one">Admin</a></li>
+                    <li class="two"><a href="./logout" class="one">Logout</a></li>
                 </ul>
             </div>
         </nav>
-        <form action="" method="POST" name="myform" class="form">
+        <form action="{{url_for('index')}}" method="POST"  class="form">
             <div class="head">
                 <h1 class="title">Registration Form</h1><br>
             </div>
@@ -30,25 +32,23 @@
             </div>
             <br>
             <div class="rollno">
-                ID:<input type="Number" placeholder=" Event ID.*" name="Id" required>
-
+                id:<input type="Number" placeholder=" College Roll No.*" name="id" required>
             </div>
             <br>
-
-            <div class="name">
-                Schedule:<input type="text" placeholder=" Schedule" name="Schedule" required>
+            <div class="rollno">
+                schedule:<input type="Name" placeholder=" College Roll No.*" name="schedule" required>
             </div>
             <br>
-
-            <div class="name">
-                Rules:<textarea rows="2" cols="25" name="Rules" form="usrform">
-
-                </textarea>
+            <div class="rollno">
+                rules:<input type="Name" placeholder=" College Roll No.*" name="rules" required>
             </div>
             <br>
-
-            submit: <input type="submit" name="" id="">
             
+
+            <div class="submit">
+                <input type="submit" class="button">        
+            </div>
+           
         </form>
     </body>
 </html>

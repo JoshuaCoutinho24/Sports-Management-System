@@ -1,10 +1,11 @@
-from flask import Flask,render_template,request,abort,redirect
+from flask import Flask,render_template,request,abort,redirect,url_for
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
 from flask_login import UserMixin,LoginManager,current_user,login_user
 from flask import session
+import mysql.connector
 
 app = Flask(__name__)
 admin=Admin(app)
@@ -18,6 +19,14 @@ app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
 app.config['MYSQL_PASSWORD'] = ''
 app.config['MYSQL_DB'] = 'test'
+
+mydb = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="",
+    database="test"
+  )
+
 
 
 db= SQLAlchemy(app);  
@@ -82,7 +91,8 @@ class e(ModelView):
 
 
 
-admin.add_view(SecureModelView(student_details,db.session));
+
+admin.add_view(details(student_details,db.session));
 admin.add_view(e(events,db.session));
 
 
@@ -92,9 +102,18 @@ admin.add_view(e(events,db.session));
 
 
 
-@app.route("/")
+@app.route("/",methods=["GET"])
 def index():
-    return render_template("Home.html");
+    cursor=mydb.cursor();
+    cursor.execute("SELECT * FROM events")
+
+    myresult = cursor.fetchall()
+    
+    
+
+    return render_template("Home.html",data=myresult);
+
+    
 
 
 
@@ -167,7 +186,7 @@ def log2():
 
 
 
-@app.route("/addmain")
+@app.route("/addmain",methods=(["GET","POST"]))
 def addevent():
     if request.method=="GET":
         return render_template("form2.html")
@@ -176,18 +195,30 @@ def addevent():
         name=request.form["name"];
         id=request.form["id"];
         sc=request.form["schedule"];
-        rules=request.form["Rules"];
+        rules=request.form["rules"];
 
 
-        event=student_details(Name=name,ID=id,Schedule=sc,Rules=rules);
+    
+
+        
+
+
+        event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
         db.session.add(event);
         db.session.commit();
 
 
-        return "Success";
+
+
+        return redirect(url_for("index"));
         
 
-        
+@app.route("/addd")
+def log21():
+    todos=events.query.all();
+    return render_template("Home.html",todos=todos)
+
+       
 
 
     
