@@ -155,7 +155,7 @@ def login():
     
     
 
-            return render_template("/admin.html");
+            return render_template("admin.html");
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html')
