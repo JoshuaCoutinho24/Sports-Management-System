@@ -9,35 +9,9 @@
     <title>Event Registration Form</title>
     <link rel="stylesheet" href="/static/registrations.css">
 </head>
-    <body>
-        <nav class="navbar navbar-expand-lg navbar-dark bg-light div1">
-            <div class="container-fluid">
-              <p class="navbar-brand"href="#">SMS</p> 
-              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/registrations"> Student Registration</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/addmain">Add Event</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin">Admin</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/logout">Logout</a>
-                    </li>
-                </ul>
-              </div>
-            </div>
-        </nav>
-        <form action="{{url_for('index')}}" method="POST"  class="form">
+    <body class="body">
+        
+        <form action="/admin1" method="POST"  class="form">
             <div class="head">
                 <h1 class="title">Event Registration Form</h1><br>
             </div>

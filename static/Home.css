@@ -59,6 +59,12 @@ body{
     padding: 20px ;
     width: 280px;
     height: 300px;
+    overflow:hidden;
+    word-break: break-all;
+    text-overflow: ellipsis ;
+    white-space: nowrap;
+    display: inline-block;
+    
 }
 
 .errorMessage {

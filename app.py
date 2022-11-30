@@ -141,21 +141,26 @@ def login():
     msg = ''
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['pass']
+        password = request.form['password']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
         account = cursor.fetchone()
+        index()
         if account :
             session['loggedin'] = True
             msg = 'Logged in successfully !'
-            cursor=mydb.cursor();
-            cursor.execute("SELECT * FROM events")  
+             
 
-            myresult = cursor.fetchall()
+            c=mydb.cursor()
+            c.execute("SELECT * FROM events")
+
+            myresult = c.fetchall()
+    
+    
     
     
 
-            return render_template("admin.html");
+            return render_template("admin.html",x=myresult);
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html')
@@ -221,6 +226,16 @@ def addevent():
         event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
         db.session.add(event);
         db.session.commit();
+        c=mydb.cursor()
+        c.execute("SELECT * FROM events")
+
+        myresult = c.fetchall()
+    
+    
+    
+    
+
+        return render_template("admin.html",x=myresult);
 
 
 
@@ -231,17 +246,8 @@ def addevent():
 @app.route("/index",methods=(["GET","POST"]))
 def ind():
     
-        if request.method=="GET":
-            return render_template("index.html")
-
-        if request.method=="POST":
-            name=request.form["name"];
-            id=request.form["id"];
-            sc=request.form["schedule"];
-            rules=request.form["rules"];
-            event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
-            db.session.add(event);
-            db.session.commit();
+        
+            
         
             cursor=mydb.cursor();
             cursor.execute("SELECT * FROM events")
@@ -257,10 +263,25 @@ def ind():
     
         
 
-@app.route("/addd")
-def log21():
-    todos=events.query.all();
-    return render_template("Home.html",todos=todos)
+@app.route("/reroute")
+def log21(id):
+    id=request.forms["id1"];
+     
+    cursor=mydb.cursor();
+    query=("SELECT * FROM events where ID=%s")
+    cursor.execute(query,id)
+
+    myresult = cursor.fetchall()
+    return render_template("index.html",data=myresult);
+
+
+
+
+
+
+    
+
+
 
        
 
