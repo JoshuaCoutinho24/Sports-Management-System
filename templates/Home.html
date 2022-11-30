@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="/static/Home.css">
   </head>
   <body>
-    <img src="/images/sport-congresse.jpg" alt="">
+    
 
     <nav class="x">
       <div class="container-fluid"  >
@@ -19,7 +19,7 @@
               <li class="navbar-brand one" href="#" style="list-style-type: none;">SMS</li>
           </div>
           <ul class="nav navbar-nav">
-              <li class="active two"><a href="./" class="one">Home</a></li>
+              <li class="active two"><a href="./" class="one active-page">Home</a></li>
               <li class="two"><a href="./registrations" class="one">Register</a></li>
               <li class="two"><a href="./login" class="one">Login</a></li>
           </ul>
@@ -27,22 +27,24 @@
   </nav>
 
     <div class="">
-      <h1 class="ones">Sports Management System</h1>
+      <h1 class="ones"></h1>
     </div>
 
     
    <div class="done">
       {% for x in data %}   
       <div class="center">
-        <b>{{x[0]}}</b><br>
-        {{x[1]}}<br>
-        {{x[2]}}<br>
-        {{x[3]}}
+       <center><h1 class="d">Event</h1></center> 
+        <b>Name:</b><div class="e">{{x[0]}}</div><br>
+        <b>ID:</b><div class="e">{{x[1]}}</div><br> 
+        <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
+        <b>Rules:</b><div class="e">{{x[3]}}</div><br>
+        <a href="/events.html">Click here.......</a>
       </div><br>
       {% endfor %}
     </div>   
     
    
-    <h1>HEllo</h1>
+    
   </body>
 </html>

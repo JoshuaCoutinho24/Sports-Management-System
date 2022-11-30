@@ -129,7 +129,7 @@ def index():
     
     
 
-    return render_template("/demo.html",data=myresult);
+    return render_template("/Home.html",data=myresult);
 
     
 
@@ -141,7 +141,7 @@ def login():
     msg = ''
     if request.method == 'POST':
         username = request.form['username']
-        password = request.form['password']
+        password = request.form['pass']
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
         account = cursor.fetchone()
