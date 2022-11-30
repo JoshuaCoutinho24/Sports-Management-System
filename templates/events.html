@@ -9,6 +9,38 @@
     <title>Document</title>
 </head>
 <body>
+
+    <div>
+        <table class="table table-hover table-dark">
+            <tr>
+                <th>ID</th>
+                <th> Name</th>
+                <th>Schdule</th>
+                <th> Rules</th>
+                <th>Action</th>
+                
+            </tr>
+    
+            <tr>    
+                {% for row in data%}
+                <td>{{row[0]}}</td>
+                <td>{{row[1]}}</td>
+                <td>{{row[2]}}</td>
+                <td>{{row[3]}}</td>
+    
+                <td >
+                    <a href="" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#mymodal">Edit</a>
+                    <a href="" class="btn btn-danger btn-xs">Delete</a>
+    
+                </td>
+            </tr>
+    
+    hiii
+    
+    {% endfor %}
+        </table>
+    
+    </div>
     
 </body>
 </html>
