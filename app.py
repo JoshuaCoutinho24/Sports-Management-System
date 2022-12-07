@@ -1,5 +1,5 @@
 from flask import Flask,render_template,request,abort,redirect,url_for
-from flask_admin import Admin,AdminIndexView
+from flask_admin import Admin,AdminIndexView,BaseView,expose
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
@@ -8,12 +8,13 @@ from flask import session
 import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField
-from flask_bootstrap import Bootstrap
+
+
 
 
 app = Flask(__name__)
 admin=Admin(app)
-Bootstrap(app);
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/test"
@@ -56,6 +57,17 @@ class user(FlaskForm):
 
 
 
+class logout(BaseView):
+    @expose("/")
+    def logou(self):
+        return redirect("/logout")
+        
+
+
+
+
+
+
 
 
 
@@ -73,7 +85,8 @@ class student_details(db.Model,UserMixin):
         return '<student_details %r>' % (self.name)
 
 
-class details(ModelView):
+class sdetails(ModelView):
+    column_display_pk=True;
     form_columns = ['Name', 'Rollno', 'email', 'Class', 'Department','Sport',]
 
 class SecureModelView(ModelView):
@@ -100,6 +113,7 @@ class events(db.Model):
 
 
 class e(ModelView):
+    column_display_pk=True;
     form_columns = ['Name', 'ID',  'Schedule', 'Rules']
 
 
@@ -109,8 +123,9 @@ class e(ModelView):
 
 
 
-admin.add_view(details(student_details,db.session));
-admin.add_view(ModelView(events,db.session));
+admin.add_view(sdetails(student_details,db.session));
+admin.add_view(e(events,db.session));
+admin.add_view(logout( name="Logout" ));
 
 
 
@@ -274,7 +289,8 @@ def log21(id):
     myresult = cursor.fetchall()
     return render_template("index.html",data=myresult);
 
-
+    
+app.route
 
 
 
