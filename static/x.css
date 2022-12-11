@@ -1,25 +1,19 @@
 *{
     margin: 0;
     padding: 0;
-    
-
 }
 
-
-.div1{
-    
+.div1{   
     background: linear-gradient(to right, #434343 0%, black 100%);
     height: 90px;
-    
 }
-.ul1 li{    
-   display: inline;
 
+.ul1 li{
+   display: inline;
 }
-.div2{
-    
-   
-   height:   200px;
+
+.div2{   
+   height: 200px;
 }
 
 img {

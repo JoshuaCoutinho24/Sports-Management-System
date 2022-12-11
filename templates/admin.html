@@ -17,7 +17,7 @@
               <a class="navbar-brand one" href="#">SMS</a>
           </div>
           <ul class="nav navbar-nav">
-              <li class="active two"><a href="./" class="one">Home</a></li>
+              
               
               
               <li class="two"><a href="./admin" class="one">Admin</a></li>
@@ -28,18 +28,22 @@
   </nav>
 
   <div class="done">
-    {% for x in data %}   
+    {% for x in x %}   
     <div class="center">
-      <b>{{x[0]}}</b><br>
-      {{x[1]}}<br>
-      {{x[2]}}<br>
-      {{x[3]}}
+     <center><h1 class="d">Event</h1></center> 
+      <b>Name:</b><div class="e">{{x[0]}}</div><br>
+      <form action="">
+      <b name="id1">ID:</b><div class="e">{{x[1]}}</div><br> 
+    </form>
+      <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
+      <b>Rules:</b><div class="e">{{x[3]}}</div><br>
+      <a href="./index.html">Click here.......</a>
     </div><br>
     {% endfor %}
   </div>   
   
 
     </div>
-    <h1>HEllo</h1>
+    
   </body>
 </html>

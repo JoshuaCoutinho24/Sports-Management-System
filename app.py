@@ -1,5 +1,5 @@
-from flask import Flask,render_template,request,abort,redirect,url_for
-from flask_admin import Admin,AdminIndexView
+from flask import Flask,render_template,request,abort,redirect,url_for,jsonify,make_response
+from flask_admin import Admin,AdminIndexView,BaseView,expose
 from flask_admin.contrib.sqla import ModelView
 from flask_sqlalchemy import SQLAlchemy
 from flask_mysqldb import MySQL
@@ -8,12 +8,13 @@ from flask import session
 import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField
-from flask_bootstrap import Bootstrap
+
+
 
 
 app = Flask(__name__)
 admin=Admin(app)
-Bootstrap(app);
+
 
 
 app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:@localhost/test"
@@ -56,6 +57,22 @@ class user(FlaskForm):
 
 
 
+class logout(BaseView):
+    @expose("/")
+    def logou(self):
+        return redirect("/logout")
+
+class Dashboard(BaseView):
+    @expose("/")
+    def log(self):
+        return redirect("/dashboard")
+        
+
+
+
+
+
+
 
 
 
@@ -66,15 +83,16 @@ class student_details(db.Model,UserMixin):
     email=db.Column(db.Text)
     Class=db.Column(db.Text)
     Department=db.Column(db.Text)
-    Sport=db.Column(db.Text)
+    
     column_display_pk = True
 
     def __repr__(self):
         return '<student_details %r>' % (self.name)
 
 
-class details(ModelView):
-    form_columns = ['Name', 'Rollno', 'email', 'Class', 'Department','Sport',]
+class sdetails(ModelView):
+    column_display_pk=True;
+    form_columns = ['Name', 'Rollno', 'email', 'Class', 'Department']
 
 class SecureModelView(ModelView):
     def is_accessible(self):
@@ -100,7 +118,22 @@ class events(db.Model):
 
 
 class e(ModelView):
+    column_display_pk=True;
     form_columns = ['Name', 'ID',  'Schedule', 'Rules']
+
+
+
+class sport(db.Model):
+    S_rollno=db.Column(db.Integer,primary_key=True);
+    Sport=db.Column(db.Text);
+
+    def __repr__(self):
+        return '<sport %r>' % (self.name)
+
+
+class e2(ModelView):
+    column_display_pk=True;
+    form_columns = ['S_rollno', 'Sport']    
 
 
 
@@ -109,8 +142,12 @@ class e(ModelView):
 
 
 
-admin.add_view(details(student_details,db.session));
-admin.add_view(ModelView(events,db.session));
+admin.add_view(sdetails(student_details,db.session));
+admin.add_view(e(events,db.session));
+admin.add_view(e2(sport,db.session));
+admin.add_view(Dashboard( name="DashBoard" ));
+admin.add_view(logout( name="Logout" ));
+
 
 
 
@@ -129,7 +166,7 @@ def index():
     
     
 
-    return render_template("/demo.html",data=myresult);
+    return render_template("/Home.html",data=myresult);
 
     
 
@@ -145,17 +182,22 @@ def login():
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
         account = cursor.fetchone()
+        index()
         if account :
             session['loggedin'] = True
             msg = 'Logged in successfully !'
-            cursor=mydb.cursor();
-            cursor.execute("SELECT * FROM events")  
+             
 
-            myresult = cursor.fetchall()
+            c=mydb.cursor()
+            c.execute("SELECT * FROM events")
+
+            myresult = c.fetchall()
+    
+    
     
     
 
-            return render_template("/admin.html");
+            return render_template("admin.html",x=myresult);
         else:
             msg = 'Incorrect username / password !'
     return render_template('login.html')
@@ -183,16 +225,21 @@ def insert():
         number=request.form["number1"];
         class1=request.form["classes"];
         dep=request.form["department"];
-        sport=request.form.getlist("sport");
-        str1 = ','.join(sport);
+        sport1=request.form.getlist("sport");
+        str1 = ','.join(sport1);
         mail=request.form["email"];
         
 
 
 
-        stud=student_details(Name=name,Rollno=number,email=mail,Class=class1,Department=dep,Sport=str1);
+        stud=student_details(Name=name,Rollno=number,email=mail,Class=class1,Department=dep);
         db.session.add(stud);
         db.session.commit();
+        sp=sport(  S_rollno=number,Sport=str1)
+       
+        db.session.add(sp);
+        db.session.commit();
+        
 
 
         return "success"    
@@ -221,6 +268,16 @@ def addevent():
         event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
         db.session.add(event);
         db.session.commit();
+        c=mydb.cursor()
+        c.execute("SELECT * FROM events")
+
+        myresult = c.fetchall()
+    
+    
+    
+    
+
+        return render_template("admin.html",x=myresult);
 
 
 
@@ -231,17 +288,8 @@ def addevent():
 @app.route("/index",methods=(["GET","POST"]))
 def ind():
     
-        if request.method=="GET":
-            return render_template("index.html")
-
-        if request.method=="POST":
-            name=request.form["name"];
-            id=request.form["id"];
-            sc=request.form["schedule"];
-            rules=request.form["rules"];
-            event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
-            db.session.add(event);
-            db.session.commit();
+        
+            
         
             cursor=mydb.cursor();
             cursor.execute("SELECT * FROM events")
@@ -257,10 +305,71 @@ def ind():
     
         
 
-@app.route("/addd")
-def log21():
-    todos=events.query.all();
-    return render_template("Home.html",todos=todos)
+@app.route("/reroute")
+def log21(id):
+    id=request.forms["id1"];
+     
+    cursor=mydb.cursor();
+    query=("SELECT * FROM events where ID=%s")
+    cursor.execute(query,id)
+
+    myresult = cursor.fetchall()
+    return render_template("index.html",data=myresult);
+
+    
+
+
+@app.route("/admin",methods=["GET","POST"])
+def func():
+
+    count = student_details.query.filter_by(Sport="Basketball").count();
+    print(count);
+    cursor=mydb.cursor();
+    cursor.execute("SELECT * FROM events")
+
+    myresult = cursor.fetchall()
+    
+    
+
+    return redirect("/admin",myresult=count,my1=myresult)
+
+    
+
+@app.route("/dashboard")
+def f():
+    
+    basketball = sport.query.filter_by(Sport="Basketball").count();
+    football = sport.query.filter_by(Sport="Football").count();
+    Volleyball = sport.query.filter_by(Sport="Volleyball").count();
+
+    cursor=mydb.cursor();
+    cursor.execute("SELECT * from basketball_registrations")
+   
+
+    bb = cursor.fetchall()
+    cursor.execute("SELECT * from football_registrations")
+    ff=cursor.fetchall();
+
+
+    cursor.execute("SELECT  Name,Rollno,Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno INTERSECT SELECT  Name,Rollno,Sport FROM student_details RIGHT JOIN sport ON student_details.Rollno = sport.S_rollno")
+    intersect=cursor.fetchall();
+
+    cursor.execute("SELECT * FROM `past_events`")
+    tri=cursor.fetchall();
+
+    
+    
+    
+
+    return render_template("demo.html",football=football,basketball=basketball, Volleyball=Volleyball,bb=bb,ff=ff,intersect=intersect,tri=tri)
+
+
+
+
+
+    
+
+
 
        
 

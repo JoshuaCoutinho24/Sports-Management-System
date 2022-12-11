@@ -4,23 +4,30 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <title>Registration Form</title>
+    
+    <title>Student Registration Form</title>
     <link rel="stylesheet" href="/static/registrations.css">
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <title>Document</title>
 </head>
-    <body>
-        <nav class="x">
-            <div class="container-fluid"  >
-                <div class="navbar-header">
-                    <a class="navbar-brand one" href="#">SMS</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li class="active two"><a href="./" class="one">Home</a></li>
-                    <li class="two"><a href="./registrations" class="one">Register</a></li>
-                    <li class="two"><a href="./login" class="one">Login</a></li>
-                </ul>
+    <body class="body">
+      <nav class="x">
+        <div class="container-fluid"  >
+            <div class="navbar-nav three">
+                <li class="navbar-brand one" href="#" style="list-style-type: none;">SMS</li>
             </div>
-        </nav>
+            <ul class="nav navbar-nav">
+                <li class="active two"><a href="./" class="one">Home</a></li>
+                <li class="two"><a href="./registrations" class="one active-page">Register</a></li>
+                <li class="two"><a href="./login" class="one">Login</a></li>
+            </ul>
+        </div>
+    </nav>
+    
         <form action="" method="POST" name="myform" class="form">
             <div class="head">
                 <h1 class="title">Registration Form</h1><br>
@@ -72,8 +79,12 @@
             </div>
             <br>
             <div class="submit">
-                <input type="submit" class="button">        
+                <input type="submit" class="button" >        
             </div>
         </form>
+
+
+
     </body>
+    
 </html>

@@ -1,18 +1,26 @@
+
+*{
+    margin: 0;
+    padding: 0;
+
+}
 body{
     font-size: 20px;
-    padding: 30px;
-    background-color: lightgreen;
+    padding: 0px;
+    background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
     color: rgb(32, 141, 32);
-    font-family: Assistant, sans-serif;
+    font-family: Assistant, sans-serif; 
     height: 100%;
     width: 100%;
+    margin: 0;
    
     
 }
 
 .x{
-    background-image: linear-gradient(90deg,rgb(32, 141, 32), #57d25b);
-    border-radius: 10px;
+    
+    background-image: linear-gradient(90deg,rgb(32, 79, 141), #7e57d2);
+    border-radius: 0px;
 }
  
 .one{
@@ -24,7 +32,7 @@ body{
     padding-bottom: 13px;
     border-top: solid 2px rgb(32, 141, 32);
     border-bottom: solid 2px rgb(32, 141, 32);
-    background-image: linear-gradient(lightgreen, lightgreen);
+    background-image: linear-gradient(lightgreen, rgb(144, 160, 238));
     color: rgb(32, 141, 32);
 }
 
@@ -41,7 +49,7 @@ body{
 .center{
     flex-direction: row;    
     color: aliceblue;
-    background-image: linear-gradient(90deg,rgb(32, 141, 32), #57d25b);
+    background-image: linear-gradient(90deg,rgb(32, 67, 141), #d25b57);
     border-radius: 10px;
     margin: 30px;
     box-shadow: 
@@ -51,6 +59,12 @@ body{
     padding: 20px ;
     width: 280px;
     height: 300px;
+    overflow:hidden;
+    word-break: break-all;
+    text-overflow: ellipsis ;
+    white-space: nowrap;
+    display: inline-block;
+    
 }
 
 .errorMessage {
@@ -76,4 +90,18 @@ body{
     border-right: 10px solid transparent;
     border-left: 10px solid transparent;
     border-bottom: 15px solid white;
+}
+
+.done .d{
+    color: black;
+}
+.b{
+    color: black;
+}
+.e{
+    float: right;
+}
+.container-fluid ul li a.active-page
+{
+    background-color:rgba(0, 255, 242, 0.545);
 }
