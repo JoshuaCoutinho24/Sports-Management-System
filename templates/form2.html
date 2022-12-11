@@ -34,9 +34,44 @@
             
 
             <div class="submit">
-                <input type="submit" class="button">        
+                <input type="submit" class="button" onclick="submi()">        
             </div>
            
         </form>
     </body>
+    {% block script %}
+
+    <script>
+        function submi(){
+            var name=document.getElementsByName("name")
+            var number=document.getElementsByName("id")
+            var classes123=document.getElementsByName("schedule")
+            var department=document.getElementsByName("rules")
+            
+
+            var entry={
+            name: name.value,
+            number : number.value,
+            classes123: classes123.value,
+            department: department.value
+
+            };
+
+            fetch("${window.origin}/x",{
+                method:"post",
+                credentials: "include", 
+                body:JSON.stringify(entry),
+                cache:"no-cache",
+                headers:new Headers({
+                    "content-type":"applicayion/json"
+    
+                })
+                
+
+             })
+
+        }
+    </script>
+
+    {% endblock %}
 </html>
