@@ -109,7 +109,7 @@ class events(db.Model):
 
     column_display_pk = True
     Name=db.Column(db.Text)
-    ID=db.Column(db.Integer,primary_key=True)
+    ID= db.Column(db.Integer,primary_key=True)
     Schedule=db.Column(db.Text)
     Rules=db.Column(db.Text)
 
@@ -351,7 +351,7 @@ def f():
     ff=cursor.fetchall();
 
 
-    cursor.execute("SELECT  Name,Rollno,Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno INTERSECT SELECT  Name,Rollno,Sport FROM student_details RIGHT JOIN sport ON student_details.Rollno = sport.S_rollno")
+    cursor.execute("SELECT  Name,Rollno,Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ")
     intersect=cursor.fetchall();
 
     cursor.execute("SELECT * FROM `past_events`")

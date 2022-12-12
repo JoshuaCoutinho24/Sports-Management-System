@@ -12,7 +12,7 @@ body{
 .x{
     
     background-color: azure;
-    
+    padding: 30px;
     border-radius:  10px;
     width:unset;
     align-self: center;
@@ -79,4 +79,9 @@ table, th, td {
 .container-fluid ul li a.active-page
 {
     background-color:rgba(0, 255, 242, 0.545);
+}
+
+td{
+    text-align: center;
+
 }
