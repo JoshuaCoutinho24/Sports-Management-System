@@ -12,38 +12,43 @@
   </head>
   <body>
     <nav class="x">
-      <div class="container-fluid"  >
-          <div class="navbar-header">
-              <a class="navbar-brand one" href="#">SMS</a>
-          </div>
-          <ul class="nav navbar-nav">
-              
-              
-              
-              <li class="two"><a href="./admin" class="one">Admin</a></li>
-              <li class="two"><a href="./form2" class="one">Add Event</a></li>
-              <li class="two"><a href="./logout" class="one">Logout</a></li>
-          </ul>
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand one" href="#">SMS</a>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="two"><a href="./admin" class="one">Home</a></li><li class="two"><a href="./admin/student_details" class="one">Student Details</a></li>
+          <li class="two"><a href="./admin/events" class="one">Events</a></li>
+          <li class="two"><a href="./admin/sport" class="one">Sport</a></li>
+          <li class="two"><a href="./dashboard" class="one">DashBoard</a></li>
+          <li class="two"><a href="./form2" class="one">Add Event</a></li>
+          <li class="two"><a href="./logout" class="one">Logout</a></li>
+        </ul>
       </div>
-  </nav>
+    </nav>
 
-  <div class="done">
-    {% for x in x %}   
-    <div class="center">
-     <center><h1 class="d">Event</h1></center> 
-      <b>Name:</b><div class="e">{{x[0]}}</div><br>
-      <form action="">
-      <b name="id1">ID:</b><div class="e">{{x[1]}}</div><br> 
-    </form>
-      <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
-      <b>Rules:</b><div class="e">{{x[3]}}</div><br>
-      <a href="./index.html">Click here.......</a>
-    </div><br>
-    {% endfor %}
-  </div>   
-  
-
+    <div class="done">
+      {% for x in x %}   
+      <div class="center">
+        <center><h1 class="d">Event</h1></center> 
+        <b>Name:</b>
+        <div class="e">
+          {{x[0]}}
+        </div><br>
+        <b name="id1">ID:</b>
+        <div class="e">
+          {{x[1]}}
+        </div><br>
+        <b>Schedule:</b>
+        <div class="e">
+          {{x[2]}}
+        </div><br>
+        <b>Rules:</b>
+        <div class="e">
+          {{x[3]}}
+        </div><br>
+      </div><br>
+      {% endfor %}
     </div>
-    
   </body>
 </html>

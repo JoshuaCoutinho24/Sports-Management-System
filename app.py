@@ -66,18 +66,11 @@ class Dashboard(BaseView):
     @expose("/")
     def log(self):
         return redirect("/dashboard")
-        
 
 
 
 
-
-
-
-
-
-class student_details(db.Model,UserMixin):
-    
+class student_details(db.Model,UserMixin):    
     Name=db.Column(db.Text)
     Rollno=db.Column(db.Integer,primary_key=True,)
     email=db.Column(db.Text)
@@ -99,10 +92,10 @@ class SecureModelView(ModelView):
         if "logged in" in session:
             return True;
         else:
-            abort(403);
+            abort(404);
         
-   
-    
+
+
 
 
 class events(db.Model):
@@ -133,11 +126,7 @@ class sport(db.Model):
 
 class e2(ModelView):
     column_display_pk=True;
-    form_columns = ['S_rollno', 'Sport']    
-
-
-
-   
+    form_columns = ['S_rollno', 'Sport']
 
 
 
@@ -152,11 +141,6 @@ admin.add_view(logout( name="Logout" ));
 
 
 
-
-
-
-
-
 @app.route("/",methods=["GET"])
 def index():
     cursor=mydb.cursor();
@@ -164,11 +148,10 @@ def index():
 
     myresult = cursor.fetchall()
     
-    
 
     return render_template("/Home.html",data=myresult);
 
-    
+
 
 
 
@@ -226,23 +209,21 @@ def insert():
         class1=request.form["classes"];
         dep=request.form["department"];
         sport1=request.form.getlist("sport");
-        str1 = ','.join(sport1);
         mail=request.form["email"];
-        
-
 
 
         stud=student_details(Name=name,Rollno=number,email=mail,Class=class1,Department=dep);
         db.session.add(stud);
         db.session.commit();
-        sp=sport(  S_rollno=number,Sport=str1)
-       
-        db.session.add(sp);
-        db.session.commit();
+
+        for str1 in sport1:
+            sp=sport(S_rollno=number,Sport=str1);
+            db.session.add(sp);
+            db.session.commit();
         
 
 
-        return "success"    
+        return redirect("/ ");    
 
 
 @app.route("/form2")
@@ -343,42 +324,36 @@ def f():
     Volleyball = sport.query.filter_by(Sport="Volleyball").count();
 
     cursor=mydb.cursor();
-    cursor.execute("SELECT * from basketball_registrations")
-   
-
+    cursor.execute("SELECT * from basketball_registrations ORDER BY S_rollno;")
     bb = cursor.fetchall()
-    cursor.execute("SELECT * from football_registrations")
+    
+    cursor.execute("SELECT * from football_registrations ORDER BY S_rollno;")
     ff=cursor.fetchall();
 
+    cursor.execute("SELECT * from volleyball_registrations ORDER BY S_rollno;")
+    vv=cursor.fetchall();
 
-    cursor.execute("SELECT  Name,Rollno,Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ")
+    cursor.execute("SELECT Name, Rollno, Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ORDER BY S_rollno;;")
     intersect=cursor.fetchall();
+
+    cursor.execute("SELECT Name, Department FROM student_details UNION ALL SELECT Name, Department FROM faculty ORDER BY Department;")
+    trial=cursor.fetchall();
 
     cursor.execute("SELECT * FROM `past_events`")
     tri=cursor.fetchall();
 
     
-    
-    
 
-    return render_template("demo.html",football=football,basketball=basketball, Volleyball=Volleyball,bb=bb,ff=ff,intersect=intersect,tri=tri)
+    return render_template("demo.html", football=football, basketball=basketball, Volleyball=Volleyball, bb=bb, ff=ff, vv=vv, intersect=intersect, tri=tri, trial=trial)
 
 
 
 
 
-    
 
-
-
-       
-
-
-    
     
 
 
        
 
 app.run(debug=True)
-

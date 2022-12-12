@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home</title>
+    <title>Home - Events</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -11,40 +11,30 @@
     <link rel="stylesheet" href="/static/Home.css">
   </head>
   <body>
-    
-
     <nav class="x">
-      <div class="container-fluid"  >
-          <div class="navbar-nav three">
-              <li class="navbar-brand one" href="#" style="list-style-type: none;">SMS</li>
-          </div>
-          <ul class="nav navbar-nav">
-              <li class="active two"><a href="./" class="one active-page">Home</a></li>
-              <li class="two"><a href="./registrations" class="one">Register</a></li>
-              <li class="two"><a href="./login" class="one">Login</a></li>
-          </ul>
+      <div class="container-fluid">
+        <div class="navbar-nav three">
+          <li class="navbar-brand one" href="#" style="list-style-type: none;">SMS</li>
+        </div>
+        <ul class="nav navbar-nav">
+          <li class="active two"><a href="./" class="one active-page">Home</a></li>
+          <li class="two"><a href="./registrations" class="one">Register</a></li>
+          <li class="two"><a href="./login" class="one">Login</a></li>
+        </ul>
       </div>
-  </nav>
+    </nav>
 
-    <div class="">
-      <h1 class="ones"></h1>
-    </div>
-
-    
-   <div class="done">
+    <div class="done">
       {% for x in data %}   
       <div class="center">
-       <center><h1 class="d">Event</h1></center> 
+        <center><h1 class="d">Event</h1></center> 
         <b>Name:</b><div class="e">{{x[0]}}</div><br>
         <b name="id1">ID:</b><div class="e">{{x[1]}}</div><br> 
         <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
         <b>Rules:</b><div class="e">{{x[3]}}</div><br>
-        
       </div><br>
       {% endfor %}
-    </div>   
-    
-   
-    
+    </div>
+
   </body>
 </html>

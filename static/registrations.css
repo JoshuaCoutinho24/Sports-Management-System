@@ -1,28 +1,19 @@
-
-
-*{
-    margin: 0;
-    padding: 0;
-
-}
-.body{
+body{
     font-size: 20px;
     padding: 0px;
     background: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
-    font-family: Assistant, sans-serif;
-    height: 100%;
+    font-family: Assistant, sans-serif; 
+    height: 1000px;
     width: 100%;
     margin: 0;
-   
-    
+
 }
 
 .x{
-    
     background-image: linear-gradient(90deg,rgb(32, 79, 141), #7e57d2);
-    border-radius:  0px;
+    border-radius: 0px;
 }
- 
+
 .one{
     color: lightgreen;
 }
@@ -30,26 +21,18 @@
 .two :hover{
     padding-top: 13px;
     padding-bottom: 13px;
-    border-top: solid 2px rgb(32, 141, 32);
-    border-bottom: solid 2px rgb(32, 141, 32);
-    background-image: linear-gradient(lightgreen, rgb(144, 160, 238));
-    color: rgb(32, 141, 32);
-}
+    border-top: solid 2px rgb(32, 67, 141);
+    border-bottom: solid 2px rgb(32, 67, 141);
+    background-image: linear-gradient(rgba(55, 129, 239, 0.564), rgb(44, 196, 207));
 
-
-
-.two :after{
-    background-image: linear-gradient(90deg,rgb(32, 141, 32), #57d25b);
-    color: lightgreen;
 }
 
 .form{
-    
-    margin: 60px -120px;
-    padding: 40px;
+    margin: 50px 10px;
+    padding: 60px 40px 90px 40px;
     font-size: 1.7rem;
     background-image: linear-gradient(90deg,rgb(70, 32, 141), #577ed2);
-    width: 800px;
+    width: 50%;
     border-radius: 10%;
     display: flex;
     flex-direction: column;
@@ -58,7 +41,7 @@
     0px 10px 20px rgba(65, 36, 158, 0.338), 
     0px 30px 60px 1px rgba(91, 36, 158, 0.495);
     position: relative;
-    left: 32%;
+    left: 25%;
 }
 
 .form .head .title{
@@ -75,11 +58,7 @@ input{
     color: rgb(39, 32, 141);
 }
 
-.name input{
-    width: 100%;
-}
-
-.rollno input{
+.name input, .rollno input, .email input, .ID input, .schedule input, .rules input{
     width: 100%;
 }
 
@@ -108,10 +87,6 @@ input{
     margin: 0 0 0 30px;
 }
 
-.email input{
-    width: 100%;
-}
-
 .submit .button{
     width: 100%;
     text-transform: uppercase;
@@ -127,6 +102,7 @@ input{
     color: rgb(32, 96, 141);
     transition: 0.8s;
 }
+
 .container-fluid ul li a.active-page
 {
     background-color:rgba(0, 255, 242, 0.545);

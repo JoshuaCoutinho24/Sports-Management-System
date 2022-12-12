@@ -1,144 +1,162 @@
-
-
 <html>
-  <body>
+  <head>
+    <title>Admin - Display</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    
     <link rel="stylesheet" href="/static/index1.css">
-    
+  </head>
+  <body>
+    <nav>
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand one" href="./admin">Admin</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="two"><a href="./admin" class="one">Home</a></li>
+              <li class="two"><a href="./admin/student_details" class="one">Student Details</a></li>
+              <li class="two"><a href="./admin/events" class="one">Events</a></li>
+              <li class="two"><a href="./admin/sport" class="one">Sport</a></li>
+              <li class="two"><a href="./dashboard" class="one active-page">DashBoard</a></li>
+              <li class="two"><a href="./form2" class="one">Add Event</a></li>
+              <li class="two"><a href="./logout" class="one">Logout</a></li>
+          </ul>
+      </div>
+    </nav>
 
-
-    
-  
-
-
-
-     
     <div class="x">
-        <h3>Total Count</h3>
-        <div class="one">
-        <table >
-            <tr>
-                <th>Basketball</th>     
-                <th>Football</th> 
-                <th>Volleyball</th>
-            </tr>
-            
-            
-            {% block body %}
-            <tr>
-                <td>{{basketball}}</td>
-                <td>{{football}}</td> 
-                <td>{{Volleyball}}</td>             
-            </tr>      
-            {% endblock %}
-            
-                                                      
-
-            
+      <h2>Total Count</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Basketball</th>
+            <th>Football</th>
+            <th>Volleyball</th>
+          </tr>
+          {% block body %}
+          <tr>
+            <td>{{basketball}}</td>
+            <td>{{football}}</td> 
+            <td>{{Volleyball}}</td>             
+          </tr>      
+          {% endblock %}
         </table>
-
+      </div>
     </div>
-  </div>
 
-  <div class="x">
-    <h3>Basketball Registrations</h3>
-    <div class="one">
-      <table>
-        <tr>
-          
-                <th>Sport</th> 
-                <th>RollNo</th>
-
-
-        </tr>
-
-        {% for x in bb %}
-        <tr>
+    <div class="x">
+      <h2>Basketball Registrations</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>RollNo</th>
+          </tr>
+          {% for x in bb %}
+          <tr>
             <td>{{x[0]}}</td>
-            <td>{{x[1]}}</td> 
-                    
-        </tr>      
-        {% endfor%}
-
-      </table>
-
+            <td>{{x[1]}}</td>
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
     </div>
-  </div>
 
-
-  <div class="x">
-    <h3>Football Registrations</h3>
-    <div class="one">
-      <table>
-        <tr>
-          
-                <th>Sport</th> 
-                <th>RollNo</th>
-
-
-        </tr>
-
-        {% for x in ff %}
-        <tr>
+    <div class="x">
+      <h2>Football Registrations</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>RollNo</th>
+          </tr>
+          {% for x in ff %}
+          <tr>
             <td>{{x[0]}}</td>
-            <td>{{x[1]}}</td> 
-                    
-        </tr>      
-        {% endfor%}
-
-      </table>
-
+            <td>{{x[1]}}</td>        
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
     </div>
-  </div>
 
-
-  <div class="x">
-    <h3>Registrations</h3>
-    <div class="one">
-      <table>
-        <tr>
-          
-                <th>Name</th> 
-                <th>RollNo</th>
-                <th>Sport</th>
-
-
-        </tr>
-
-        {% for x in intersect %}
-        <tr>
+    <div class="x">
+      <h2>Volleyball Registrations</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>RollNo</th>
+          </tr>
+          {% for x in vv %}
+          <tr>
             <td>{{x[0]}}</td>
-            <td>{{x[1]}}</td> 
-            <td>{{x[2]}}</td> 
-                    
-        </tr>      
-        {% endfor%}
-
-      </table>
-
+            <td>{{x[1]}}</td>        
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
     </div>
-  </div>
 
-  <div class="done">
-    {% for x in tri %}   
-    <div class="center">
-     <center><h1 class="d">Event</h1></center> 
-      <b>Name:</b><div class="e">{{x[0]}}</div><br>
-      <b name="id1">ID:</b><div class="e">{{x[1]}}</div><br> 
-      <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
-      <b>Rules:</b><div class="e">{{x[3]}}</div><br>
-    </div><br>
-    {% endfor %}
-  </div>   
-  
+    <div class="x">
+      <h2>Registrations</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Name</th> 
+            <th>RollNo</th>
+            <th>Sport</th>
+          </tr>
+          {% for x in intersect %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>
+            <td>{{x[2]}}</td>        
+          </tr>      
+          {% endfor%}
+        </table>
+      </div>
+    </div>
 
-
+    <div class="x">
+      <h2>All Users</h2>
+      <div class="one">
+        <table>
+          <tr>
+            <th>Name</th> 
+            <th>Department</th>
+          </tr>
+          {% for x in trial %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>      
+          </tr>      
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+    
+    <div class="done">
+      {% for x in tri %}   
+      <div class="center">
+        <center><h1 class="d">Event</h1></center> 
+        <b>Name:</b>
+        <div class="e">
+          {{x[0]}}
+        </div><br>
+        <b name="id1">ID:</b>
+        <div class="e">
+          {{x[1]}}
+        </div><br> 
+        <b>Schedule:</b>
+        <div class="e">
+          {{x[2]}}
+        </div><br>
+        <b>Rules:</b>
+        <div class="e">
+          {{x[3]}}
+        </div><br>
+      </div><br>
+      {% endfor %}
+    </div>
   </body>
-  </html> 
-
-
-    
-
-    
-     
-     
-    
+</html>

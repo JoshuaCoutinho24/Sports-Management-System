@@ -1,10 +1,9 @@
-
-
 *{
     margin: 0;
     padding: 0;
 
 }
+
 body{
     font-size: 20px;
     padding: 0px;
@@ -13,12 +12,9 @@ body{
     height: 100%;
     width: 100%;
     margin: 0;
-   
-    
 }
 
-.x{
-    
+.x{ 
     background-image: linear-gradient(90deg,rgb(32, 79, 141), #7e57d2);
     border-radius:  0px;
 }
@@ -30,13 +26,11 @@ body{
 .two :hover{
     padding-top: 13px;
     padding-bottom: 13px;
-    border-top: solid 2px rgb(32, 141, 32);
-    border-bottom: solid 2px rgb(32, 141, 32);
-    background-image: linear-gradient(lightgreen, rgb(144, 160, 238));
-    color: rgb(32, 141, 32);
+    border-top: solid 2px rgb(32, 67, 141);
+    border-bottom: solid 2px rgb(32, 67, 141);
+    background-image: linear-gradient(rgba(55, 129, 239, 0.564), rgb(44, 196, 207));
+
 }
-
-
 
 .two :after{
     background-image: linear-gradient(90deg,rgb(32, 141, 32), #57d25b);
@@ -44,12 +38,11 @@ body{
 }
 
 .form{
-    
-    margin: 60px -120px;
-    padding: 40px;
+    margin: 50px 10px 80px 10px;
+    padding: 60px 40px 90px 40px;
     font-size: 1.7rem;
     background-image: linear-gradient(90deg,rgb(70, 32, 141), #577ed2);
-    width: 800px;
+    width: 40%;
     border-radius: 10%;
     display: flex;
     flex-direction: column;
@@ -58,7 +51,7 @@ body{
     0px 10px 20px rgba(65, 36, 158, 0.338), 
     0px 30px 60px 1px rgba(91, 36, 158, 0.495);
     position: relative;
-    left: 32%;
+    left: 30%;
 }
 
 .form .head .title{
