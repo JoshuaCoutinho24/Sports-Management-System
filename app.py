@@ -163,10 +163,10 @@ def login():
         username = request.form['username']
         password = request.form['password']
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password, ))
+        cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password))
         account = cursor.fetchone()
         index()
-        if account :
+        if account:
             session['loggedin'] = True
             msg = 'Logged in successfully !'
              
@@ -182,6 +182,7 @@ def login():
 
             return render_template("admin.html",x=myresult);
         else:
+            session['loggedin'] = False
             msg = 'Incorrect username / password !'
     return render_template('login.html')
 

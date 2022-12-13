@@ -80,3 +80,8 @@ th{
 td{
     text-align: center;
 }
+
+.active-page{
+    background-color: aliceblue;
+    color: black;
+}
