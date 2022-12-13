@@ -19,11 +19,17 @@
         <ul class="nav navbar-nav">
           <li class="active two"><a href="./" class="one active-page">Home</a></li>
           <li class="two"><a href="./registrations" class="one">Register</a></li>
-          <li class="two"><a href="./login" class="one">Login</a></li>
+          {% if not session.user_id %}
+          <li class="two"><a href="/login" class="one">Login</a></li>
+          {% else %}
+          <li class="two">hello {{session.user_id}}</li>
+          {% endif %}
         </ul>
       </div>
     </nav>
-
+    <div class="header">
+      
+    </div>
     <div class="done">
       {% for x in data %}   
       <div class="center">

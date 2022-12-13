@@ -9,7 +9,7 @@ import mysql.connector
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,BooleanField
 
-
+from functools import wraps
 
 
 app = Flask(__name__)
@@ -38,14 +38,22 @@ mydb = mysql.connector.connect(
 db= SQLAlchemy(app);  
 mysql=MySQL(app);
 
-login=LoginManager(app);
+# login=LoginManager(app);
 
 
-@login.user_loader
-def userid(id):
-    return user.query.get(int(id))
+# @login.user_loader
+# def userid(id):
+#     return user.query.get(int(id))
     
 
+def login_required(f):
+    
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if session.get("user_id") is None:
+            return redirect("/login")
+        return f(*args, **kwargs)
+    return decorated_function
 
 #Classes
 
@@ -149,7 +157,7 @@ def index():
     myresult = cursor.fetchall()
     
 
-    return render_template("/Home.html",data=myresult);
+    return render_template("Home.html",data=myresult);
 
 
 
@@ -167,25 +175,18 @@ def login():
         account = cursor.fetchone()
         index()
         if account:
-            session['loggedin'] = True
+            session['user_id'] = account[0]
             msg = 'Logged in successfully !'
              
 
-            c=mydb.cursor()
-            c.execute("SELECT * FROM events")
+            
 
-            myresult = c.fetchall()
-    
-    
-    
-    
-
-            return render_template("admin.html",x=myresult);
+            return redirect("/admin");
         else:
-            session['loggedin'] = False
             msg = 'Incorrect username / password !'
-    return render_template('login.html')
-
+            return render_template('error.html',msg=msg)
+    else:
+        return render_template("login.html")
 
 
 @app.route("/logout")
@@ -228,6 +229,7 @@ def insert():
 
 
 @app.route("/form2")
+@login_required
 def log2():
     return render_template("form2.html");
 
@@ -246,20 +248,24 @@ def addevent():
         rules=request.form["rules"];
 
 
-    
-        event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
-        db.session.add(event);
-        db.session.commit();
-        c=mydb.cursor()
-        c.execute("SELECT * FROM events")
+        
+        cursor = mysql.connection.cursor()
+        cursor.execute(''' INSERT INTO events (Name,ID,Schedule,rules) VALUES(%s,%s,%s,%s)''',(name,id,sc,rules))
+        mysql.connection.commit()
+        cursor.close()
+        # event=events(Name=name,ID=id,Schedule=sc,Rules=rules);
+        # db.session.add(event);
+        # db.session.commit();
+        # c=mydb.cursor()
+        # c.execute("SELECT * FROM events")
 
-        myresult = c.fetchall()
+        # myresult = c.fetchall()
     
     
     
     
 
-        return render_template("admin.html",x=myresult);
+        return redirect("/")
 
 
 
@@ -302,10 +308,11 @@ def log21(id):
 
 
 @app.route("/admin",methods=["GET","POST"])
+@login_required
 def func():
 
-    count = student_details.query.filter_by(Sport="Basketball").count();
-    print(count);
+    
+   
     cursor=mydb.cursor();
     cursor.execute("SELECT * FROM events")
 
@@ -313,11 +320,12 @@ def func():
     
     
 
-    return redirect("/admin",myresult=count,my1=myresult)
+    return render_template("admin.html",x=myresult)
 
     
 
 @app.route("/dashboard")
+@login_required
 def f():
     
     basketball = sport.query.filter_by(Sport="Basketball").count();
@@ -325,13 +333,13 @@ def f():
     Volleyball = sport.query.filter_by(Sport="Volleyball").count();
 
     cursor=mydb.cursor();
-    cursor.execute("SELECT * from basketball_registrations ORDER BY S_rollno;")
+    cursor.execute("SELECT * from basketball ORDER BY S_rollno;")
     bb = cursor.fetchall()
     
-    cursor.execute("SELECT * from football_registrations ORDER BY S_rollno;")
+    cursor.execute("SELECT * from football ORDER BY S_rollno;")
     ff=cursor.fetchall();
 
-    cursor.execute("SELECT * from volleyball_registrations ORDER BY S_rollno;")
+    cursor.execute("SELECT * from volleyball ORDER BY S_rollno;")
     vv=cursor.fetchall();
 
     cursor.execute("SELECT Name, Rollno, Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ORDER BY S_rollno;;")
