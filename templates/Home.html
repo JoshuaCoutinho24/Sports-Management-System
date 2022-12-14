@@ -15,15 +15,15 @@
     <nav class="x">
       <div class="container-fluid">
         <div class="navbar-nav three">
-          <li class="navbar-brand one" style="list-style-type: none;">SMS</li>
+          <li class="navbar-brand one" style="list-style-type: none;" href="./admin">SMS</li>
         </div>
         <ul class="nav navbar-nav">
           {% if not session.user_id %}
-          <li class="two"><a href="./" class="one active-page">Home</a></li>
+          <li class="two"><a href="./admin/" class="one active-page">Home</a></li>
           <li class="two"><a href="./registrations" class="one">Register</a></li>
           <li class="two"><a href="/login" class="one">Login</a></li>
           {% else %}
-          <li class="two"><a href="./admin" class="one active-page">Home</a></li>
+          <li class="two"><a href="./admin/ " class="one active-page">Home</a></li>
           <li class="two"><a href="./admin/student_details" class="one">Student Details</a></li>
           <li class="two"><a href="./admin/events" class="one">Events</a></li>
           <li class="two"><a href="./admin/sport" class="one">Sport</a></li>

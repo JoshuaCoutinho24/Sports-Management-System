@@ -1,53 +1,143 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <title>Home</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/static/fornav.css">
+    <title>Admin - Display</title>
+    <link rel="stylesheet" href="./static/fornav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="/static/Home.css">
+    <link rel="stylesheet" href="/static/index1.css">
   </head>
   <body>
-    <nav class="x">
+    <nav>
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand one">SMS</a>
-        </div>
-        <ul class="nav navbar-nav">
-          <li class="two"><a href="./admin" class="one">Home</a></li><li class="two"><a href="./admin/student_details" class="one">Student Details</a></li>
-          <li class="two"><a href="./admin/events" class="one">Events</a></li>
-          <li class="two"><a href="./admin/sport" class="one">Sport</a></li>
-          <li class="two"><a href="./dashboard" class="one">DashBoard</a></li>
-          <li class="two"><a href="./form2" class="one">Add Event</a></li>
-          <li class="two"><a href="./logout" class="one">Logout</a></li>
-        </ul>
+          <div class="navbar-header">
+              <a class="navbar-brand one" href="#">Admin</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="two"><a href="./dashboard" class="one active-page">DashBoard</a></li>
+              <li class="two"><a href="./logout" class="one">Logout</a></li>
+          </ul>
       </div>
     </nav>
 
+    <div class="cont">
+      <div class="items">
+        <h2>Total Count</h2>
+        <table>
+          <tr>
+            <th>Basketball</th>
+            <th>Football</th>
+            <th>Volleyball</th>
+          </tr>
+          {% block body %}
+          <tr>
+            <td>{{basketball[0][0]}}</td>
+            <td>{{football[0][0]}}</td> 
+            <td>{{Volleyball[0][0]}}</td>             
+          </tr>      
+          {% endblock %}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont basketball">
+      <div class="items">
+        <h2>Basketball Registrations</h2>
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>Roll No.</th>
+          </tr>
+          {% for x in bb %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont football">
+      <div class="items">
+        <h2>Football Registrations</h2>
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>Roll No.</th>
+          </tr>
+          {% for x in ff %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>        
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont volleyball">
+      <div class="items">
+        <h2>Volleyball Registrations</h2>
+        <table>
+          <tr>
+            <th>Sport</th> 
+            <th>Roll No.</th>
+          </tr>
+          {% for x in vv %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>        
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont">
+      <div class="items">
+        <h2>Registrations</h2>
+        <table>
+          <tr>
+            <th>Name</th> 
+            <th>Roll No.</th>
+            <th>Sport</th>
+          </tr>
+          {% for x in intersect %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>
+            <td>{{x[2]}}</td>        
+          </tr>      
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont">
+      <div class="items">
+        <h2>All Users</h2>
+        <table>
+          <tr>
+            <th>Name</th> 
+            <th>Department</th>
+          </tr>
+          {% for x in trial %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+  
     <div class="done">
-      {% for x in data %}   
+      {% for x in tri %}   
       <div class="center">
         <center><h1 class="d">Event</h1></center> 
-        <b>Name:</b>
-        <div class="e">
-          {{x[0]}}
-        </div><br>
-        <b name="id1">ID:</b>
-        <div class="e">
-          {{x[1]}}
-        </div><br>
-        <b>Schedule:</b>
-        <div class="e">
-          {{x[2]}}
-        </div><br>
-        <b>Rules:</b>
-        <div class="e">
-          {{x[3]}}
-        </div><br>
+        <b>Name:</b><div class="e">{{x[1]}}</div><br>
+        <b>ID:</b><div class="e">{{x[0]}}</div><br> 
+        <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
+        <b>Rules:</b><div class="e">{{x[3]}}</div><br>
       </div><br>
       {% endfor %}
     </div>

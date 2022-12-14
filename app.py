@@ -88,7 +88,7 @@ class student_details(db.Model,UserMixin):
     email=db.Column(db.Text)
     Class=db.Column(db.Text)
     Department=db.Column(db.Text)
-    
+
     column_display_pk = True
 
     def __repr__(self):
@@ -129,7 +129,8 @@ class e(ModelView):
 
 
 class sport(db.Model):
-    S_rollno=db.Column(db.Integer,primary_key=True);
+    id=db.Column(db.Integer,primary_key=True);
+    S_rollno=db.Column(db.Integer);
     Sport=db.Column(db.Text);
 
     def __repr__(self):
@@ -137,7 +138,7 @@ class sport(db.Model):
 
 
 class e2(ModelView):
-    column_display_pk=True;
+    
     form_columns = ['S_rollno', 'Sport']
 
 
@@ -173,18 +174,23 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
+        select = request.form['log']
+        
+        
         cursor = mysql.connection.cursor()
         cursor.execute('SELECT * FROM accounts WHERE username = %s AND password = %s', (username, password))
         account = cursor.fetchone()
-        index()
-        if account:
+        if account and select=="Coordinator":
             session['user_id'] = account[0]
             msg = 'Logged in successfully!'
-             
+            return redirect("/admin");
+
+        if account and select=="Faculty":
+            session['user_id'] = account[0]
+            msg = 'Logged in successfully!'
+            return redirect("/coordinator");
 
             
-
-            return redirect("/admin");
         else:
             msg = 'Incorrect username/password!'
             return render_template('error.html',msg=msg)
@@ -347,6 +353,42 @@ def f():
     
 
     return render_template("demo.html", football=football, basketball=basketball, Volleyball=Volleyball, bb=bb, ff=ff, vv=vv, intersect=intersect, tri=tri, trial=trial)
+
+
+@app.route("/coordinator")
+@login_required
+def coord():
+    cursor=mydb.cursor();
+    
+    cursor.execute("SELECT COUNT(*) FROM sport WHERE Sport='Basketball'")
+    basketball = cursor.fetchall()
+    
+    cursor.execute("SELECT COUNT(*) FROM sport WHERE Sport='Basketball'")
+    football = cursor.fetchall()
+    
+    cursor.execute("SELECT COUNT(*) FROM sport WHERE Sport='Basketball'")
+    Volleyball = cursor.fetchall()
+
+
+    cursor.execute("SELECT * from basketball_registrations ORDER BY S_rollno;")
+    bb = cursor.fetchall()
+    
+    cursor.execute("SELECT * from football_registrations ORDER BY S_rollno;")
+    ff=cursor.fetchall();
+
+    cursor.execute("SELECT * from volleyball_registrations ORDER BY S_rollno;")
+    vv=cursor.fetchall();
+
+    cursor.execute("SELECT Name, Rollno, Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ORDER BY S_rollno;;")
+    intersect=cursor.fetchall();
+
+    cursor.execute("SELECT Name, Department FROM student_details UNION ALL SELECT Name, Department FROM faculty GROUP BY Department;")
+    trial=cursor.fetchall();
+
+    cursor.execute("SELECT * FROM `past_events`")
+    tri=cursor.fetchall();
+
+    return render_template("admin.html", football=football, basketball=basketball, Volleyball=Volleyball, bb=bb, ff=ff, vv=vv, intersect=intersect, tri=tri, trial=trial)
 
 
 

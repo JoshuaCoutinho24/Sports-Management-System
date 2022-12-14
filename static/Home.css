@@ -71,3 +71,8 @@ body{
 .e{
     float: right;
 }
+
+.center:hover{
+    opacity: 1;
+    
+}

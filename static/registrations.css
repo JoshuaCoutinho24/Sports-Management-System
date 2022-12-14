@@ -99,3 +99,8 @@ input{
     color: #555;
     transition: 0.8s;
 }
+
+.login{
+    margin: 3px 3px 20px 3px;
+    padding: 10px;
+}
