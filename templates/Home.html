@@ -4,32 +4,37 @@
     <title>Home - Events</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="./static/fornav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="/static/Home.css">
+
   </head>
   <body>
     <nav class="x">
       <div class="container-fluid">
         <div class="navbar-nav three">
-          <li class="navbar-brand one" href="#" style="list-style-type: none;">SMS</li>
+          <li class="navbar-brand one" style="list-style-type: none;">SMS</li>
         </div>
         <ul class="nav navbar-nav">
-          <li class="active two"><a href="./" class="one active-page">Home</a></li>
-          <li class="two"><a href="./registrations" class="one">Register</a></li>
           {% if not session.user_id %}
+          <li class="two"><a href="./" class="one active-page">Home</a></li>
+          <li class="two"><a href="./registrations" class="one">Register</a></li>
           <li class="two"><a href="/login" class="one">Login</a></li>
           {% else %}
-          <li class="two">hello {{session.user_id}}</li>
+          <li class="two"><a href="./admin" class="one active-page">Home</a></li>
+          <li class="two"><a href="./admin/student_details" class="one">Student Details</a></li>
+          <li class="two"><a href="./admin/events" class="one">Events</a></li>
+          <li class="two"><a href="./admin/sport" class="one">Sport</a></li>
+          <li class="two"><a href="./dashboard" class="one">DashBoard</a></li>
+          <li class="two"><a href="./form2" class="one">Add Event</a></li>
+          <li class="two"><a href="./logout" class="one">Logout</a></li>
+          <li class="one two" style="position: absolute; right: 5%; color: #777; font-size: 1.3em;">Hello, {{session.user_id}}!</li>
           {% endif %}
         </ul>
       </div>
     </nav>
-    <div class="header">
-      
-    </div>
     <div class="done">
       {% for x in data %}   
       <div class="center">

@@ -1,8 +1,8 @@
 <html>
   <head>
     <title>Admin - Display</title>
+    <link rel="stylesheet" href="./static/fornav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    
     <link rel="stylesheet" href="/static/index1.css">
   </head>
   <body>
@@ -23,9 +23,9 @@
       </div>
     </nav>
 
-    <div class="x">
-      <h2>Total Count</h2>
-      <div class="one">
+    <div class="cont">
+      <div class="items">
+        <h2>Total Count</h2>
         <table>
           <tr>
             <th>Basketball</th>
@@ -43,13 +43,13 @@
       </div>
     </div>
 
-    <div class="x">
-      <h2>Basketball Registrations</h2>
-      <div class="one">
+    <div class="cont basketball">
+      <div class="items">
+        <h2>Basketball Registrations</h2>
         <table>
           <tr>
             <th>Sport</th> 
-            <th>RollNo</th>
+            <th>Roll No.</th>
           </tr>
           {% for x in bb %}
           <tr>
@@ -61,13 +61,13 @@
       </div>
     </div>
 
-    <div class="x">
-      <h2>Football Registrations</h2>
-      <div class="one">
+    <div class="cont football">
+      <div class="items">
+        <h2>Football Registrations</h2>
         <table>
           <tr>
             <th>Sport</th> 
-            <th>RollNo</th>
+            <th>Roll No.</th>
           </tr>
           {% for x in ff %}
           <tr>
@@ -79,13 +79,13 @@
       </div>
     </div>
 
-    <div class="x">
-      <h2>Volleyball Registrations</h2>
-      <div class="one">
+    <div class="cont volleyball">
+      <div class="items">
+        <h2>Volleyball Registrations</h2>
         <table>
           <tr>
             <th>Sport</th> 
-            <th>RollNo</th>
+            <th>Roll No.</th>
           </tr>
           {% for x in vv %}
           <tr>
@@ -97,13 +97,13 @@
       </div>
     </div>
 
-    <div class="x">
-      <h2>Registrations</h2>
-      <div class="one">
+    <div class="cont">
+      <div class="items">
+        <h2>Registrations</h2>
         <table>
           <tr>
             <th>Name</th> 
-            <th>RollNo</th>
+            <th>Roll No.</th>
             <th>Sport</th>
           </tr>
           {% for x in intersect %}
@@ -117,9 +117,9 @@
       </div>
     </div>
 
-    <div class="x">
-      <h2>All Users</h2>
-      <div class="one">
+    <div class="cont">
+      <div class="items">
+        <h2>All Users</h2>
         <table>
           <tr>
             <th>Name</th> 
@@ -128,33 +128,21 @@
           {% for x in trial %}
           <tr>
             <td>{{x[0]}}</td>
-            <td>{{x[1]}}</td>      
-          </tr>      
+            <td>{{x[1]}}</td>
+          </tr>
           {% endfor%}
         </table>
       </div>
     </div>
-    
+  
     <div class="done">
       {% for x in tri %}   
       <div class="center">
         <center><h1 class="d">Event</h1></center> 
-        <b>Name:</b>
-        <div class="e">
-          {{x[0]}}
-        </div><br>
-        <b name="id1">ID:</b>
-        <div class="e">
-          {{x[1]}}
-        </div><br> 
-        <b>Schedule:</b>
-        <div class="e">
-          {{x[2]}}
-        </div><br>
-        <b>Rules:</b>
-        <div class="e">
-          {{x[3]}}
-        </div><br>
+        <b>Name:</b><div class="e">{{x[1]}}</div><br>
+        <b>ID:</b><div class="e">{{x[0]}}</div><br> 
+        <b>Schedule:</b><div class="e">{{x[2]}}</div><br>
+        <b>Rules:</b><div class="e">{{x[3]}}</div><br>
       </div><br>
       {% endfor %}
     </div>

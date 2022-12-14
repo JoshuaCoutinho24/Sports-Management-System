@@ -1,15 +1,14 @@
-    {% extends "admin/master.html" %}
-    
+{% extends "admin/master.html" %}
 
-    {% block body %}
-
+{% block body %}
+    <link rel="stylesheet" href="/static/fornav.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="/static/index.css">
 
-    <div class="x">
+    <div class="cont">
         <h1>Admin Panel Usage</h1>
         <div class="one">
             <p>1.This page is a protected page only visible to adminstrators</p>
@@ -18,10 +17,6 @@
             <p>4.Administrators can access this information by clicking on the respected Tables required</p>
             <p>5.From Here,Administrators can Create,Edit,Delete any of the information required</p>
         </div>
-
     </div>
     
-
-    
-
-    {% endblock %}
+{% endblock %}

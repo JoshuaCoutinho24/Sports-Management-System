@@ -47,7 +47,7 @@ mysql=MySQL(app);
     
 
 def login_required(f):
-    
+
     @wraps(f)
     def decorated_function(*args, **kwargs):
         if session.get("user_id") is None:
@@ -76,6 +76,10 @@ class Dashboard(BaseView):
         return redirect("/dashboard")
 
 
+class Addevents(BaseView):
+    @expose("/")
+    def log(self):
+        return redirect("/form2")
 
 
 class student_details(db.Model,UserMixin):    
@@ -138,12 +142,13 @@ class e2(ModelView):
 
 
 
+admin.add_view(sdetails(student_details, db.session, name="Student Details"));
+admin.add_view(e(events, db.session, name="Events"));
+admin.add_view(e2(sport, db.session, name="Sports"));
+admin.add_view(Dashboard(name="DashBoard"));
+admin.add_view(Addevents(name="Add Event"));
+admin.add_view(logout(name="Logout"));
 
-admin.add_view(sdetails(student_details,db.session));
-admin.add_view(e(events,db.session));
-admin.add_view(e2(sport,db.session));
-admin.add_view(Dashboard( name="DashBoard" ));
-admin.add_view(logout( name="Logout" ));
 
 
 
@@ -162,8 +167,6 @@ def index():
 
 
 
-
-
 @app.route('/login', methods =['GET', 'POST'])
 def login():
     msg = ''
@@ -176,14 +179,14 @@ def login():
         index()
         if account:
             session['user_id'] = account[0]
-            msg = 'Logged in successfully !'
+            msg = 'Logged in successfully!'
              
 
             
 
             return redirect("/admin");
         else:
-            msg = 'Incorrect username / password !'
+            msg = 'Incorrect username/password!'
             return render_template('error.html',msg=msg)
     else:
         return render_template("login.html")
@@ -225,7 +228,7 @@ def insert():
         
 
 
-        return redirect("/ ");    
+        return redirect("/");    
 
 
 @app.route("/form2")
@@ -237,6 +240,7 @@ def log2():
 
 
 @app.route("/admin1",methods=(["GET","POST"]))
+@login_required
 def addevent():
     if request.method=="GET":
         return render_template("form2.html")
@@ -258,7 +262,6 @@ def addevent():
         # db.session.commit();
         # c=mydb.cursor()
         # c.execute("SELECT * FROM events")
-
         # myresult = c.fetchall()
     
     
@@ -270,28 +273,21 @@ def addevent():
 
 
 
-        return redirect(url_for("index.html"));
+        #return redirect(url_for("index.html"));
 
 
 @app.route("/index",methods=(["GET","POST"]))
 def ind():
-    
-        
-            
-        
-            cursor=mydb.cursor();
-            cursor.execute("SELECT * FROM events")
+    cursor=mydb.cursor();
+    cursor.execute("SELECT * FROM events")
 
-            myresult = cursor.fetchall()
-            
-    
-    
+    myresult = cursor.fetchall()
 
-            return render_template("index.html",data=myresult);
 
-    
-    
-        
+    return render_template("index.html",data=myresult);
+
+
+
 
 @app.route("/reroute")
 def log21(id):
@@ -310,36 +306,33 @@ def log21(id):
 @app.route("/admin",methods=["GET","POST"])
 @login_required
 def func():
-
-    
-   
     cursor=mydb.cursor();
     cursor.execute("SELECT * FROM events")
 
     myresult = cursor.fetchall()
-    
-    
 
-    return render_template("admin.html",x=myresult)
 
-    
+    return render_template("Home.html",data=myresult)
+
+
 
 @app.route("/dashboard")
 @login_required
 def f():
-    
+
     basketball = sport.query.filter_by(Sport="Basketball").count();
     football = sport.query.filter_by(Sport="Football").count();
     Volleyball = sport.query.filter_by(Sport="Volleyball").count();
 
     cursor=mydb.cursor();
-    cursor.execute("SELECT * from basketball ORDER BY S_rollno;")
+
+    cursor.execute("SELECT * from basketball_registrations ORDER BY S_rollno;")
     bb = cursor.fetchall()
     
-    cursor.execute("SELECT * from football ORDER BY S_rollno;")
+    cursor.execute("SELECT * from football_registrations ORDER BY S_rollno;")
     ff=cursor.fetchall();
 
-    cursor.execute("SELECT * from volleyball ORDER BY S_rollno;")
+    cursor.execute("SELECT * from volleyball_registrations ORDER BY S_rollno;")
     vv=cursor.fetchall();
 
     cursor.execute("SELECT Name, Rollno, Sport FROM student_details LEFT JOIN sport ON student_details.Rollno = sport.S_rollno ORDER BY S_rollno;;")
@@ -359,10 +352,5 @@ def f():
 
 
 
-
-    
-
-
-       
 
 app.run(debug=True)
