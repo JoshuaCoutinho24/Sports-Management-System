@@ -1,0 +1,126 @@
+<html>
+  <head>
+    <title>Admin - Display</title>
+    <link rel="stylesheet" href="./static/fornav.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/index1.css">
+  </head>
+  <body>
+    <nav>
+      <div class="container-fluid">
+          <div class="navbar-header">
+              <a class="navbar-brand one" href="#">Admin</a>
+          </div>
+          <ul class="nav navbar-nav">
+              <li class="two"><a href="./dashboard" class="one active-page">DashBoard</a></li>
+              <li class="two"><a href="./logout" class="one">Logout</a></li>
+          </ul>
+      </div>
+    </nav>
+
+    
+
+    <div class="cont basketball">
+      <div class="items">
+        <h2>Computer Registrations</h2>
+        <table>
+          <tr>
+            <th>Name</th> 
+            <th>Roll No</th>
+            <th>Class</th>
+            <th>Department</th>
+            <th>Sport</th>
+            
+          </tr>
+          {% for x in basketball %}
+          <tr>
+            <td>{{x[0]}}</td>
+            <td>{{x[1]}}</td>
+            <td>{{x[2]}}</td>
+            <td>{{x[3]}}</td>
+            <td>{{x[4]}}</td>
+          </tr>
+          {% endfor%}
+        </table>
+      </div>
+    </div>
+
+    <div class="cont basketball">
+        <div class="items">
+          <h2>SE Registrations</h2>
+          <table>
+            <tr>
+              <th>Name</th> 
+              <th>Roll No</th>
+              <th>Class</th>
+              <th>Department</th>
+              <th>Sport</th>
+              
+            </tr>
+            {% for x in football %}
+            <tr>
+              <td>{{x[0]}}</td>
+              <td>{{x[1]}}</td>
+              <td>{{x[2]}}</td>
+              <td>{{x[3]}}</td>
+              <td>{{x[4]}}</td>
+            </tr>
+            {% endfor%}
+          </table>
+        </div>
+      </div>
+
+
+
+      <div class="cont basketball">
+        <div class="items">
+          <h2>TE Registrations</h2>
+          <table>
+            <tr>
+              <th>Name</th> 
+              <th>Roll No</th>
+              <th>Class</th>
+              <th>Department</th>
+              <th>Sport</th>
+              
+            </tr>
+            {% for x in Volleyball %}
+            <tr>
+              <td>{{x[0]}}</td>
+              <td>{{x[1]}}</td>
+              <td>{{x[2]}}</td>
+              <td>{{x[3]}}</td>
+              <td>{{x[4]}}</td>
+            </tr>
+            {% endfor%}
+          </table>
+        </div>
+      </div>
+
+      <div class="cont basketball">
+        <div class="items">
+          <h2>BE Registrations</h2>
+          <table>
+            <tr>
+              <th>Name</th> 
+              <th>Roll No</th>
+              <th>Class</th>
+              <th>Department</th>
+              <th>Sport</th>
+              
+            </tr>
+            {% for x in Volleyball1 %}
+            <tr>
+              <td>{{x[0]}}</td>
+              <td>{{x[1]}}</td>
+              <td>{{x[2]}}</td>
+              <td>{{x[3]}}</td>
+              <td>{{x[4]}}</td>
+            </tr>
+            {% endfor%}
+          </table>
+        </div>
+      </div>
+
+
+    
